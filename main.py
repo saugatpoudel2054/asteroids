@@ -1,6 +1,8 @@
 """ this allows us to use code from
 the open-source pygame library
 throughout this file"""
+from sys import exit
+
 import pygame
 
 from constants import *
@@ -38,6 +40,10 @@ def main():
                 return
         pygame.Surface.fill(screen, (0, 0, 0))
         updatable.update(dt)
+        for ast in asteroids:
+            if ast.check_collision(player):
+                print("Game over!")
+                exit(1)
         for drawable_object in drawable:
             drawable_object.draw(screen)
         pygame.display.flip()
